@@ -95,8 +95,10 @@ function submitForm ()
 let forminfo = new FormData(form);
 
 const nameinput = forminfo.get("name");
-const formOutput = document.getElementById("formmsg");
+if(nameinput != "")
+{const formOutput = document.getElementById("formmsg");
 formOutput.textContent = "name: "+String(nameinput);
+}
 form.reset();
 }
 
@@ -127,14 +129,14 @@ document.addEventListener("keydown", function(input){
 });
 
 
-/*document.addEventListener("click", function(){
-    if(modal.style.display  === "inline-block")
+document.addEventListener("click", function(event){
+    if(event.target != modalbtn && modal.style.display  === "inline-block")
     {
         modal.style.display = "none";
     }
     
 
-});*/
+});
 
 modalclose.addEventListener("click",function(){
     modal.style.display = "none";
