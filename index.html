@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Exercise Review — Combined Demo</title>
+  <style>
+    :root { --bg: #fff; --fg: #111; }
+    .dark { background:#111; color:#eee; }
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin:20px; }
+    section { border:1px solid #ddd; padding:12px; margin:12px 0; border-radius:6px; }
+    .controls { display:flex; gap:8px; align-items:center; }
+    /* set modal content background when modal is open */
+    .modal .modal-content { background: white; }           /* default */
+    .modal.is-open .modal-content { background: purple; }  /* shown when open */
+    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); align-items:center; justify-content:center; }
+    .modal.is-open { display:flex; }
+    .modal-content { background:white; padding:16px; border-radius:6px; max-width:480px; width:90%; }
+    .dark .modal-content { color:#eee; }
+    .modal-close { margin-top:12px; }
+    .form-message { color: #b00; margin-top:8px; }
+    .item { padding:6px; border-bottom:1px solid #eee; cursor:pointer; }
+    .item:hover { background:#f8f8f8; }
+
+  </style>
+</head>
+<body>
+  <h1>Exercise Review — Combined Demo</h1>
+
+  <section id="counter">
+    <h2>Counter</h2>
+    <div class="controls">
+      <button id="counter-dec">-</button>
+      <strong id="counter-value">0</strong>
+      <button id="counter-inc">+</button>
+      <button id="counter-reset">Reset</button>
+    </div>
+  </section>
+
+  <section id="dark">
+    <h2>Dark Mode</h2>
+    <button id="dark-toggle">Toggle dark mode</button>
+    <p>Tip: The theme is stored in localStorage by the educator script.</p>
+  </section>
+
+  <section id="events">
+    <h2>Event Handling</h2>
+    <div id="event-list" style="max-width:360px; border:1px solid #eee; border-radius:4px; overflow:hidden;">
+      <div class="item" data-item-id="1">Item One</div>
+      <div class="item" data-item-id="2">Item Two</div>
+      <div class="item" data-item-id="3">Item Three</div>
+    </div>
+    <p id="selected-output">Selected: none</p>
+    <script>
+      // small helper to show event selection from educator script's custom event
+      document.addEventListener('DOMContentLoaded', () => {
+        const list = document.getElementById('event-list');
+        const out = document.getElementById('selected-output');
+        if (list) {
+          list.addEventListener('edu:itemSelected', (e) => {
+            out.textContent = 'Selected: ' + (e.detail && e.detail.id ? e.detail.id : 'unknown');
+          });
+        }
+      });
+    </script>
+  </section>
+
+  <section id="form" >
+    <h2>Form Submission</h2>
+    <form id="sample-form" >
+      <label>
+        Name: <input name="name" placeholder="Your name" />
+      </label>
+      <button id="submitbtn" type="submit">Submit</button>
+      <div id="formmsg" class="form-message" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <section id="modal-section">
+    <h2>Modal (model-pop-up)</h2>
+    <button id="openmodalbtn" data-open-modal="demoModal">Open Modal</button>
+
+    <div id="demoModal" class="modal" role="dialog" aria-hidden="true">
+      <div class="modal-content">
+        <h3>Demo Modal</h3>
+        <p>This is a simple modal content area. Press ESC or click outside to close.</p>
+        <button id="mdlclose" class="modal-close">Close</button>
+      </div>
+    </div>
+  </section>
+
+  <hr />
+  <p>Scripts:</p>
+  <!-- student-scripts.js is pseudo-code; uncomment for reference -->
+  <script src="script.js"></script>
+
+</body>
+</html>
